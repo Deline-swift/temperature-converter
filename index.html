@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temparature Converter</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="darkmode">
+    <section id="container-heaader">
+        <div class="icon1">
+            <i class="fa-solid fa-temperature-half"></i>
+        </div>
+        <div class="heading">
+            <h1>Temperature Converter</h1>
+        </div>
+        <div class="icon2">
+           <button class="mode" id="switchmode"> <i class="fa-solid fa-moon"></i></button>
+        </div>
+    </section>
+    <section id="container-content">
+        <div class="form">
+            <form action="">
+                <label for="temperature">Temperature</label>
+                <input type="number" id="data" placeholder="Enter Value">
+            </form>
+        </div>
+        <div class="content">
+            <label for="From" id="from">From</label>
+
+            <label for="To" id="to">To</label>
+           
+        </div>
+        <div class="content1">
+            <div class="select1">
+                <select id="Options">
+                    <option value="Celsius">Celsius(&deg;C)</option>
+                    <option value="Fahrenheit">Fahrenheit(&deg;F)</option>
+                    <option value="Kelvin">Kelvin(K)</option>
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="button-content">
+                <button id="btn"> 
+                    <div class="arrow1"><i class="fa-solid fa-arrow-right"></i></div> 
+                    <div class="arrow2">  <i class="fa-solid fa-arrow-left"></i></div>
+                  
+                
+                    </button>
+              </div>
+
+           <div class="select2">
+                <select id="Option">
+                    <option value="Fahrenheit">Fahrenheit(&deg;F)</option>
+                    <option value="Celsius">Celsius(&deg;C)</option>
+                    <option value="Kelvin">Kelvin(K)</option>
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+       <div class="container-end">
+        <div class="para">
+           <h2>Result</h2>
+        </div>
+       </div>
+    </section>
+   
+</body>
+<script src="/script.js"></script>
+</html>
