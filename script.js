@@ -7,7 +7,10 @@
   const fromUnitSelect = document.getElementById("Options");
   const toUnitSelect = document.getElementById("Option");
   const swapbutton = document.getElementById("btn");
-  
+  const output = document.getElementById("output");
+  const History = document.getElementById("historystore");
+ 
+  const MAX_HISTORY_ITEMS = 5;
  
  
  
@@ -43,6 +46,7 @@ const celsuisToKelvin = function(celsuis){
 const kelvinToCelsuis = function(kelvin){
    return(kelvin-273.15);
 }
+  
 // adding EvenListeners
 document.addEventListener("DOMContentLoaded",function(){
    temperatureInput.addEventListener("input",convertTemp);
@@ -55,56 +59,108 @@ document.addEventListener("DOMContentLoaded",function(){
 //temperature conversion function
 function convertTemp(){
 
-const value = parseInt(temperatureInput .value);
+const inputValue = parseInt(temperatureInput .value);
 const FromUnit = fromUnitSelect.value;
 const ToUnit = toUnitSelect.value;
 
 
-if(isNaN(value)) return;
+if(isNaN(inputValue)) return;
 
 let result = 0;
 
 
 if(FromUnit === "Celsius" && ToUnit === "Fahrenheit"){
-   result = celsuisToFahrenheit(value)
+   result = celsuisToFahrenheit(inputValue)
 }
 else if(FromUnit === "Fahrenheit" && ToUnit === "Celsius"){
- result = fahrenheitToCelsuis(value)
+ result = fahrenheitToCelsuis(inputValue)
 }
 else if ( FromUnit === "Kelvin" && ToUnit === "Fahrenheit"){
-   result = kelvinToFahrenheit(value)
+   result = kelvinToFahrenheit(inputValue)
 }
 else if ( FromUnit === "Fahrenheit" && ToUnit === "Kelvin"){
-   result = fahrenheitToKelvin(value)
+   result = fahrenheitToKelvin(inputValue)
 }
 else if (FromUnit === "Celsius" && ToUnit === "Kelvin"){
-   result = celsuisToKelvin(value)
+   result = celsuisToKelvin(inputValue)
 }
 else if (FromUnit === "Kelvin" && ToUnit === "Celsius"){
-   result =  kelvinToCelsuis(value)
+   result =  kelvinToCelsuis(inputValue)
 }
+
+output.innerText = result;
+saveHistory(result)
+
 };
+
    //Swap button function
    function toggleUnits() {
       const tempUnit = fromUnitSelect.value;
       fromUnitSelect.value = toUnitSelect.value;
       toUnitSelect.value = tempUnit;
+      
     
 
       swapbutton.style.transform = "rotate(180deg)";
       setTimeout(() => {
         swapbutton.style.transform = "rotate(0deg)";
-      }, 300);
+      },200);
     // function converts the value entered after the swap
       convertTemp();
     }
+    
+      function saveHistory(entry){
+         const history = JSON.parse(localStorage.getItem("conversionHistory")) || [];
+         history.unshift(entry)
 
+         if(history.length > 5){
+            history.pop()
+         }
+       localStorage.setItem("conversionHistory", JSON.stringify(history))
+       loadHistory();
+      }
+  
+      function loadHistory(){
+         let historyList = document.getElementById("History-list");
+         try {
+            historyList.innerHTML = "";
+           
+            historyList.style.display = "block"
+           
+            let history = JSON.parse(localStorage.getItem("conversionHistory"))|| [];
+            if(history.length === 0){
+               let li = document.createElement("li");
+               li.textContent = "No History Yet";
+               li.classList.add("no-history");
+               historyList.appendChild(li);
+               return;
+            }
+   
+            history.forEach(entry => {
+               let li = document.createElement("li")
+               li.textContent = entry;
+               historyList.appendChild(li)
+            })
+        
+         } catch (error) {
+            console.error("safari storage issue:",error)
+         }
+      }
 
-
-
-
+   window.onload = loadHistory;
 
  
-          
+ 
+
+
+    
+   
+   
+
+   
+   
+
+
+
 
 
