@@ -110,12 +110,14 @@ saveHistory(result)
     }
     
       function saveHistory(entry){
+         // get the new history from the local storage//
          const history = JSON.parse(localStorage.getItem("conversionHistory")) || [];
-         history.unshift(entry)
-
+         history.unshift(entry) // adds the new result to the begin of the array//
+         //Removes the oldest result in the history when it exist 5//
          if(history.length > 5){
             history.pop()
          }
+         // updates the new entry in the local store//
        localStorage.setItem("conversionHistory", JSON.stringify(history))
        loadHistory();
       }
@@ -123,10 +125,11 @@ saveHistory(result)
       function loadHistory(){
          let historyList = document.getElementById("History-list");
          try {
+            //clears history //
             historyList.innerHTML = "";
            
             historyList.style.display = "block"
-           
+           //retrives entry from local store and display on the UI//
             let history = JSON.parse(localStorage.getItem("conversionHistory"))|| [];
             if(history.length === 0){
                let li = document.createElement("li");
@@ -146,7 +149,7 @@ saveHistory(result)
             console.error("safari storage issue:",error)
          }
       }
-
+//loads history once the page is loaded//
    window.onload = loadHistory;
 
  
