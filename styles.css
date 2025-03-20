@@ -141,7 +141,10 @@ input{
     
 }
 .container-end{
-    display: flex;
+   display: flex;
+   position: absolute;
+   min-height: 80px;
+   min-width: 50px;
 }
 .para h2{
     text-align: center;
@@ -166,11 +169,20 @@ input{
 .darkmode label{
     color: black;
 }
+.para{
+    position: relative;
+    top: 70%;
+   text-align: center;
+   transition: none;
+  
+
+}
 #output{
     color: black;
-margin-left: 670%;
+margin-left: 650%;
     width: max-content;
     border-radius: 4px;
+    font-weight: bolder;
   
 } 
 #historystore{
